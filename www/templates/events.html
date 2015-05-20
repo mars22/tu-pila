@@ -1,0 +1,59 @@
+<ion-view>
+    <ion-nav-buttons side="left">
+        <button class="button button-icon ion-android-drawer" ng-click="openDrawer()"></button>
+    </ion-nav-buttons>
+
+    <ion-nav-title>
+        <img  style="height: 32px;display: inline;margin-top: 5px" class="icon-left" src="img/tu.pila.logo.png"/>
+        <span  class="title-left" style="vertical-align: top">tu.pila.pl</span>
+
+
+    </ion-nav-title>
+
+    <ion-content>
+      <ion-refresher pulling-text="Pull to refresh" on-refresh="doRefresh()">
+      </ion-refresher>
+    <div class="list">
+      <div class="list card" ng-repeat="event in events">
+
+        <div class="item item-divider">
+          {{event.title}}
+
+          <p>{{event.start|date:'EEEE d MMMM yyyy' }}</p>
+        </div>
+
+
+
+        <div class="item item-body">
+          <!--<img class="full-image" src="http://placehold.it/250x250">-->
+          <img class="full-image" src="http://tu.pila.pl/{{event.image.image.url}}" ui-sref="event({eventId: event.id})">
+          <p class="text-less" ng-bind-html="event.description">
+
+          </p>
+
+        </div>
+
+        <div class="item tabs tabs-secondary tabs-icon-left">
+            <a class="tab-item" ng-click="share(event)">
+                <i class="icon ion-share"></i>
+            </a>
+
+            <a class="tab-item" ng-click="setReminder(event)">
+            <i class="icon ion-android-reminder"></i>
+
+          </a>
+          <a class="tab-item" href="#/event/{{event.id}}">
+            <i class="icon ion-more"></i>
+
+          </a>
+        </div>
+
+      </div>
+    </div>
+    <ion-infinite-scroll
+            on-infinite="loadMore()"
+            distance="1%"
+            ng-if="hasMoreEvents()">
+    </ion-infinite-scroll>
+  </ion-content>
+</ion-view>

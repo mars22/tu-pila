@@ -1,0 +1,59 @@
+<ion-view view-title="{{event.start|date:'EEEE d MMMM yyyy' }}">
+    <ion-content>
+        <div class="list card" >
+
+            <div class="item item-divider">
+                {{event.title}}
+                <p>{{event.start|date:'EEEE d MMMM yyyy' }}</p>
+            </div>
+
+
+            <div class="item item-body">
+                <img class="full-image" src="http://tu.pila.pl/{{event.image.image.url}}">
+
+                <p ng-bind-html="getSafeHtml(event.description)">
+
+                </p>
+
+
+                <div class="split-line"></div>
+
+
+                <h4>Dla kogo:</h4>
+                <p>{{event.target.name}}</p>
+
+
+
+                <h4>Lokalizacja:</h4>
+                <p>{{event.location}}</p>
+
+                <h4>Organizator:</h4>
+                <p>{{event.organiser}}</p>
+
+                <h4>Koniec wydarzenia:</h4>
+                <p>{{event.start|date:'EEEE d MMMM yyyy' }}</p>
+
+
+                <h4 ng-show="event.tickets.length >0 ">Bilety:</h4>
+
+                <p ng-repeat="ticket in event.tickets">
+                    {{ticket.type}}: {{ticket.price}}
+                </p>
+            </div>
+
+            <div class="item tabs tabs-secondary tabs-icon-left">
+                <a class="tab-item" ng-click="share(event)">
+                    <i class="icon ion-share"></i>
+
+                </a>
+
+                <a class="tab-item" ng-click="setReminder(event)">
+                    <i class="icon ion-android-reminder"></i>
+
+                </a>
+            </div>
+
+        </div>
+    </ion-content>
+</ion-view>
+
